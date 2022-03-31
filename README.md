@@ -1,46 +1,73 @@
-# Getting Started with Create React App
+# MUI v5 DatePicker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Input Field
 
-## Available Scripts
+| Component   | Built-in? | Replacable? | Other? |
+| ----------- | --------- | ----------- | ------ |
+| Input       | yes       | yes         | -      |
+| Icon button | yes       | yes         | -      |
+| Masking     | yes       | yes         | -      |
+| Formatting  | yes       | yes         | -      |
 
-In the project directory, you can run:
+## Month/Year Selection
 
-### `npm start`
+| Component              | Built-in? | Replacable? | Other?          |
+| ---------------------- | --------- | ----------- | --------------- |
+| Year select input      | no        | no          | -               |
+| Month select input     | no        | no          | (same as above) |
+| Month prev/next arrows | yes       | yes         | -               |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Calendar View
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Various options...
 
-### `npm test`
+### DatePicker
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> The date picker is rendered as a modal dialog on mobile, and a textbox with a popup on desktop.
 
-### `npm run build`
+Renders entire component (input, popup calendar with built-in month/year selection).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### StaticDatePicker
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> It's possible to render any date picker without the modal/popover and text field.
+> This can be helpful when building custom popover/modal containers.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Allows rendering calendar view independently but still includes built-in month/year selection.
 
-### `npm run eject`
+### PickersCalendar
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Lower level (undocumented?) calendar view component without built-ins and state handling.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This would allow the flexibility we need for the month/year select inputs but with the additional complexity of handling state on our end.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Keyboard AX
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Open calendar by focusing on input, then select icon button.
+- Initial focus is set on current day.
+- Change day with arrow keys.
+- Tab to: Year selection - 4-wide select grid.
+- Tab to: Month selection - prev/next arrows.
+- Tab to: Current day (only when visible).
+- Changing month with arrows seems to disabled day selection (focus may need to be reset on blur).
 
-## Learn More
+## Localization
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+> This component relies on the date management library of your choice. It supports date-fns, luxon, dayjs, moment and any other library via a public dateAdapter interface.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Jalali Calendar System
+
+Supported when using date-fns library.
+
+> Install date-fns-jalali and use @date-io/date-fns-jalali adapter to support Jalali calendar.
+
+## Questions
+
+- Can we compromise on design (use month/year selection as provided from MUI) if component is accessible as is?
+- Can the input component be used standalone? This would be needed if we use `PickersCalendar` standalone to customize month/year selection.
+
+## General 3rd Party Questions
+
+- What date management library are products using?
+  - `Moment` (along with `cldr-data` and `globalize` for date formatting in Collab)
+- Is only providing support for date-fns (react date picker) or dayjs (mantine) an option?
+- Is Jalali support a requirement?
