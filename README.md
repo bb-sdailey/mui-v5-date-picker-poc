@@ -4,18 +4,18 @@
 
 | Component   | Built-in? | Replacable? | Other? |
 | ----------- | --------- | ----------- | ------ |
-| Input       | yes       | yes         | -      |
-| Icon button | yes       | yes         | -      |
-| Masking     | yes       | yes         | -      |
-| Formatting  | yes       | yes         | -      |
+| Input       | Yes       | Yes         | -      |
+| Icon button | Yes       | Yes         | -      |
+| Masking     | Yes       | Yes         | -      |
+| Formatting  | Yes       | Yes         | -      |
 
 ## Month/Year Selection
 
-| Component              | Built-in? | Replacable? | Other?          |
-| ---------------------- | --------- | ----------- | --------------- |
-| Year select input      | no        | no          | -               |
-| Month select input     | no        | no          | (same as above) |
-| Month prev/next arrows | yes       | yes         | -               |
+| Component              | Built-in? | Replacable? | Other?                                 |
+| ---------------------- | --------- | ----------- | -------------------------------------- |
+| Year select input      | No        | No          | Built-in as a grid-based year picker.  |
+| Month select input     | No        | No          | Built-in as a grid-based month picker. |
+| Month prev/next arrows | Yes       | Yes         | -                                      |
 
 ## Calendar View
 
@@ -69,5 +69,6 @@ Supported when using date-fns library.
 
 - What date management library are products using?
   - `Moment` (along with `cldr-data` and `globalize` for date formatting in Collab)
+  - Same for ultra-ui. They plan to move away from moment in favor of date-fns in the future.
 - Is only providing support for date-fns (react date picker) or dayjs (mantine) an option?
 - Is Jalali support a requirement?
